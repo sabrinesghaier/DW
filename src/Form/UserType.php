@@ -21,14 +21,21 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('firstname', TextType::class)
+        ->add('firstname', TextType::class,[
+            'attr' => [
+                // this will always show, and is a standard html attribute
+                'class' => 'form-control',
+              
+            ]
+        ])
         ->add('lastname', TextType::class)
         ->add('phone', TelType::class)
         ->add('mail', EmailType::class)
         ->add('password', PasswordType::class)
        
-        ->add('save', SubmitType::class, ['attr' => ['class' => 'save']
-        ]);
+       
+        ->add('save', SubmitType::class
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

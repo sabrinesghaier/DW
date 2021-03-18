@@ -12,6 +12,6 @@ class DwController extends AbstractController
 */
 public function home()
     {        
-        return $this->render('user/index.html.twig');#je veux la route /home
+        return $this->render('home.html.twig');#je veux la route /home
     }
 }

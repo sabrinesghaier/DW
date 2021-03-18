@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\MessageGenerator;
 
-class UserController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/", name="home")
      */
     public function new(Request $request, MessageGenerator $messageGenerator)
     {
@@ -26,22 +26,30 @@ class UserController extends AbstractController
         $message = '';
    		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
        		 dump($user);//alors afficher le contenu de l'objet $user sur la console
-             $em = $this->getDoctrine()->getManager();
-             $em->persist($user);
-             $em->flush();
-             $message = $messageGenerator->getHappyMessage();
-             //$this->addFlash('success', 'Formulaire Envoyé!');
+            
+            
+            $repository = $this->getDoctrine()->getRepository(User::class);
+            
+           $user_obj= $repository->findOneBy(['email' => $form['mail']]);
+           if( $user_obj && $user_obj->getPassword()== $form['password'])
+               {
+               
+                }
+                
 
-             return $this->redirectToRoute('home');
-
+   
+            
          
         }
        
 
-      return $this->render('user/index.html.twig', [
+      return $this->render('home.html.twig', [
             
             'Formulaire'=>$form->createView(),
             'message'=>$message ]);    
     }
+
+    
+
 
 }
