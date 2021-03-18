@@ -53,7 +53,13 @@ class Publication
      */
     private $commentaire;
 
+    public function __construct()
 
+    {
+        $this->user = new ArrayCollection();
+        $this->commentaire = new ArrayCollection();
+        
+    }
     
 
   

@@ -37,7 +37,12 @@ class Message
     private $discussion;
 
 
-   
+    public function __construct()
+
+    {
+        $this->discussion = new ArrayCollection();
+        
+    }
 
     /**
      * Get the value of date

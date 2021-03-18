@@ -1,5 +1,5 @@
 <?php
-// src/Entity/Publication.php
+// src/Entity/Commentaire.php
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity()
-* @ORM\Table(name="publication")
+* @ORM\Table(name="commentaire")
 * */
-class Publication
+class Commentaire
 {
     /**
     * @ORM\Id()
@@ -38,7 +38,12 @@ class Publication
      */
     private $publication;
 
+    public function __construct()
 
+    {
+        $this->publication = new ArrayCollection();
+        
+    }
 
 
     /**

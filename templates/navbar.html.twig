@@ -1,0 +1,32 @@
+<html>
+    <head>
+    <title>{% block titre %}Navbar{% endblock%}</title>
+    {% block stylesheets %}
+        <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">    
+    <link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">
+
+    {% endblock %}
+    </head>
+    <body>
+        {% block contenuPrincipal %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-secondary mb-5">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Inscription</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{path('user')}}">Home</a>
+                        </li>                        
+                        
+                    </ul>
+                    </div>
+                </div>
+                </nav>
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

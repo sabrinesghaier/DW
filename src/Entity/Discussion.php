@@ -36,8 +36,22 @@ class Discussion
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="discussions")
      */
     private $user;
+     /**
+     * Il y a plusieurs user possible pour plusieurs relations
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="discussions")
+     */
+    private $user2;
 
+    public function __construct()
 
+    {
+        $this->message = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->user2 = new ArrayCollection();
+        
+    }
+        
+    
     
 
   
@@ -102,6 +116,26 @@ class Discussion
     public function setUser($user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get il y a plusieurs user possible pour plusieurs relations
+     */ 
+    public function getUser2()
+    {
+        return $this->user2;
+    }
+
+    /**
+     * Set il y a plusieurs user possible pour plusieurs relations
+     *
+     * @return  self
+     */ 
+    public function setUser2($user2)
+    {
+        $this->user2 = $user2;
 
         return $this;
     }

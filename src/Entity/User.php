@@ -21,7 +21,11 @@ class User
     /**
     * @ORM\Column(type="string")
     */
-    private $name;
+    private $lastname;
+       /**
+    * @ORM\Column(type="string")
+    */
+    private $firstname;
 
     /**
     * @ORM\Column(type="integer")
@@ -29,7 +33,8 @@ class User
     private $phone;
 
       /**
-    * @ORM\Column(type="string")
+    * @ORM\Column(type="string",unique=true)
+
     */
     private $mail;
 
@@ -52,36 +57,23 @@ class User
      */
     private $publication;
 
-    /**
-     * Il y a plusieurs user possible pour plusieurs relations
-     * @ORM\ManyToMany(targetEntity="App\Entity\Relation", mappedBy="user")
-     * @ORM\JoinTable(name="user_relation")
+   /**
+     * 
+     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     * @ORM\JoinTable(name="relations")
      */
-    private $relation; 
-    
+    private $relations;
 
   
+    public function __construct()
+
+    {
+        $this->discussion = new ArrayCollection();
+        $this->publication = new ArrayCollection();
+        
+    }
+
     
-
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     /**
      * Get il y a un seul panier possible par client
@@ -183,22 +175,64 @@ class User
         return $this;
     }
 
+    
+
     /**
-     * Get il y a plusieurs user possible pour plusieurs relations
+     * Get the value of relations
      */ 
-    public function getRelation()
+    public function getRelations()
     {
-        return $this->relation;
+        return $this->relations;
     }
 
     /**
-     * Set il y a plusieurs user possible pour plusieurs relations
+     * Set the value of relations
      *
      * @return  self
      */ 
-    public function setRelation($relation)
+    public function setRelations($relations)
     {
-        $this->relation = $relation;
+        $this->relations = $relations;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of firstname
+     */ 
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set the value of firstname
+     *
+     * @return  self
+     */ 
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lastname
+     */ 
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set the value of lastname
+     *
+     * @return  self
+     */ 
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }
