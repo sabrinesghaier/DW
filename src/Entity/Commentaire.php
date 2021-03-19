@@ -35,6 +35,7 @@ class Commentaire
     /**
      * Il y a plusieurs commentaires pour une publication
      * @ORM\ManyToOne(targetEntity="App\Entity\Publication", inversedBy="commentaires")
+     * @ORM\JoinColumn(name="publication_id", referencedColumnName="id")
      */
     private $publication;
 

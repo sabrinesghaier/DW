@@ -2,42 +2,40 @@
 
 {% block stylesheets %}
     {{ parent() }}
-<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">    
+<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">
+   
 {% endblock %}
 {% block contenuPrincipal %}
     {{ parent() }}
-<br/>
-<br/>
-     
 
+<div class="container">    
     <div class="row">
-        <div class="col-6">hhhhhh</div>
-         <div class="col-6 w-50 p-5 m-5 bg-light ">
-                {{ form_start(Formulaire) }}
+        <div >
+        <img class="col-6" src="{{asset('/Image/3.png')}}">
+        </div>
+            <div class="col-6">
+                {{ form_start(FormulaireHome) }}
                     
-                    <div class="my-custom-class-for-errors">
-                        {{ form_errors(Formulaire) }}
+                    <div class="danger">
+                        {{ message }}
                     </div>
                     
-                    </div><div class="form-group">
-                        {{ form_row(Formulaire.mail) }}
+                    <div class="form-group">
+                        {{ form_row(FormulaireHome.mail) }}
                     </div>
                     <div class="form-group">
-                        {{ form_row(Formulaire.password) }}
+                        {{ form_row(FormulaireHome.password) }}
                     </div>
                    
-                        {{form_widget(Formulaire.save, { 'value': '' }) }}
-                       
-
-                    
-               {{ form_end(Formulaire) }}
-
-
+                        {{form_widget(FormulaireHome.save, { 'value': '' }) }}
+           
+               {{form_end(FormulaireHome) }}
+             
+           
             </div>
+ 
+
     </div>
-
-
-<br/>
-
+</div>
 
 {% endblock %}    

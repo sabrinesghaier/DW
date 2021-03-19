@@ -37,7 +37,7 @@ class Publication
     */
     private $description;
 
-    
+   
 
     /**
      * Il y a plusieurs publications possible pour un user
@@ -49,7 +49,7 @@ class Publication
      /**
      * Il y a une publication pour plusieurs commentaires
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="publication")
-     *  @ORM\JoinColumn(name="commentaire_id", referencedColumnName="id")
+     *  
      */
     private $commentaire;
 
@@ -169,4 +169,7 @@ class Publication
 
         return $this;
     }
+
+     
+   
 }

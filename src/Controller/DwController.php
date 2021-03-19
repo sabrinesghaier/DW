@@ -10,8 +10,10 @@ class DwController extends AbstractController
 /**
 * @Route("/",name="home" )
 */
+
 public function home()
-    {        
+    {   
+        $isConnected = false ;     
         return $this->render('home.html.twig');#je veux la route /home
     }
 }

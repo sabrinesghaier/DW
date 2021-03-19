@@ -1,0 +1,27 @@
+{% extends 'navbar.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">    
+{% endblock %}
+{% block contenuPrincipal %}
+    {{ parent() }}
+<br/>
+<br/>
+
+<br/>
+    <h1>Mes contacts</h1>
+<ul>
+    {% for y in publication %}
+
+    <br/>
+    
+        <li>{{ y.description}}</li>
+        <li>{{ y.date}}</li>
+        <hr/>
+    {% endfor %}
+</ul>
+<br/>
+
+
+{% endblock %}  
