@@ -1,0 +1,41 @@
+{% extends 'navbar.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">
+   
+{% endblock %}
+{% block contenuPrincipal %}
+    {{ parent() }}
+
+<div class="container">    
+    <div class="row">
+        <div >
+        <img class="col-6" src="{{asset('/Image/3.png')}}">
+        </div>
+            <div class="col-6">
+                {{ form_start(FormulaireHome) }}
+                    
+                    <div class="danger">
+                        {{ message }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_row(FormulaireHome.mail) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(FormulaireHome.password) }}
+                    </div>
+                   
+                        {{form_widget(FormulaireHome.save, { 'value': '' }) }}
+           
+               {{form_end(FormulaireHome) }}
+             
+           
+            </div>
+ 
+
+    </div>
+</div>
+
+{% endblock %}    

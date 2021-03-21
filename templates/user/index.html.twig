@@ -1,0 +1,48 @@
+{% extends 'navbar.html.twig' %}
+{% form_theme Formulaire 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">    
+{% endblock %}
+
+{% block contenuPrincipal %}
+    {{ parent() }}
+    <br/>
+<br/>
+{{ message}}
+<br/>
+    <div class="container">
+        <div class="row ">
+            <div class="w-50 p-5 m-5 bg-light ">
+                {{ form_start(Formulaire) }}
+                    
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(Formulaire) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_row(Formulaire.firstname) }}
+                    </div><div class="form-group">
+                        {{ form_row(Formulaire.lastname) }}
+                    </div><div class="form-group">
+                        {{ form_row(Formulaire.mail) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(Formulaire.password) }}
+                    </div>
+                    <div class="form-group" >
+                        {{ form_row(Formulaire.phone) }}
+                    </div>
+                        {{form_widget(Formulaire.save, { 'value': '' }) }}
+                       
+
+                    
+               {{ form_end(Formulaire) }}
+
+
+            </div>
+              
+        </div>
+    </div>
+  
+{% endblock %} 

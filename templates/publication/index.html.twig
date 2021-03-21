@@ -1,0 +1,46 @@
+{% extends 'navbar.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{asset('/css/style.css')}}" rel="stylesheet" media="all">  
+ 
+{% endblock %}
+{% block contenuPrincipal %}
+    {{ parent() }}
+<div class="container">    
+    <div class="row">
+        <div class="col-6">Fil d'actualité</div>
+        <div class="col-6 ">
+                {{ form_start(FormulairePublication) }}
+                    
+                    <div class="danger">
+                       
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_row(FormulairePublication.description) }}
+                    </div>
+                   
+                   
+                        {{form_widget(FormulairePublication.publish, { 'value': '' }) }}
+           
+               {{form_end(FormulairePublication) }}
+        </div>
+
+    </div>
+    <div class="row">
+        <ul>
+        {% for y in publication %}
+
+   
+    
+            <li>{{ y.description}}</li>
+           
+            <hr/>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}    

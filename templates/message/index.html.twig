@@ -1,0 +1,44 @@
+{% extends 'navbar.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">
+   
+{% endblock %}
+{% block contenuPrincipal %}
+    {{ parent() }}
+
+<div class="container">    
+    <div class="row">
+       
+            <div class="col-6">
+                {{ form_start(Formulaire) }}
+                    
+                   
+                    <div class="form-group">
+                        {{ form_row(Formulaire.nom) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(Formulaire.email) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_row(Formulaire.date) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(Formulaire.texte) }}
+                    </div>
+                    
+                   
+                        {{form_widget(Formulaire.envoyer, { 'value': '' }) }}
+           
+               {{form_end(Formulaire) }}
+             
+           
+            </div>
+ 
+
+    </div>
+</div>
+
+{% endblock %}    

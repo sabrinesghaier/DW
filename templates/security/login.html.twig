@@ -1,0 +1,49 @@
+{% extends 'navbar.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{asset('/css/style.css')}}" rel="stylesheet" media="all">
+   
+{% endblock %}
+{% block contenuPrincipal %}
+    {{ parent() }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img class="logo" src="{{asset('/images/3.png')}}">
+            </div>
+            <div class="col-6 inscri">
+            {% block body %}
+                <form method="post">
+                {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+                {% endif %}
+
+                <h1 class="h1 mb-3 font-weight-normal">Bienvenue dans votre communauté de dévellopeur</h1>
+                <label for="inputMail">Mail</label>
+                <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" required autofocus>
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+
+                <button class="btn btn-lg btn-primary mt-3 " type="submit">
+                    Se connecter
+                </button>
+                <a  class="inscrire " href="{{ path('user') }}">Inscrivez-vous</a>
+                </form>
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}    
