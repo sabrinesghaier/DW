@@ -201,25 +201,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of relations
-     */ 
-    public function getRelations()
-    {
-        return $this->relations;
-    }
-
-    /**
-     * Set the value of relations
-     *
-     * @return  self
-     */ 
-    public function setRelations($relations)
-    {
-        $this->relations = $relations;
-
-        return $this;
-    }
+    
 
     /**
      * Get the value of lastname
@@ -240,6 +222,9 @@ class User implements UserInterface
 
         return $this;
     }
+
+    
+    
 
     /**
      * Get the value of firstname
@@ -277,6 +262,26 @@ class User implements UserInterface
     public function setPhone($phone)
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of relations
+     */ 
+    public function getRelations()
+    {
+        return $this->relations;
+    }
+
+    /**
+     * Set the value of relations
+     *
+     * @return  self
+     */ 
+    public function setRelations($relations)
+    {
+        $this->relations = $relations;
 
         return $this;
     }

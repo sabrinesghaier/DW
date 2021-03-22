@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DwController extends AbstractController
 {
 
-
 public function home()
     {   
         $isConnected = false ;     
