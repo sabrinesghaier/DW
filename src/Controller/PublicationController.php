@@ -25,7 +25,13 @@ class PublicationController extends AbstractController
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le champs description, NotBlank {ne pas retourner vide}..)
 
-   		 if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
+        $email = $authenticationUtils->getLastUsername();
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user_ob= $repository->findOneBy(['mail' => $email]);
+        $user_obj= $repository->findOneBy(['id' => $user_ob->getId()]);//Nous remplaçerons l'id 1 par l'id de la session
+        $publication->setUser($user_obj);
+
+   		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
        		dump($publication);//alors afficher le contenu de l'objet $article sur la console
             $date = new DateTime('NOW');
             $publication->setDate($date);
@@ -33,15 +39,14 @@ class PublicationController extends AbstractController
             $publication->setType("texte");//Il convient de creer une table Type et de pointer vers son id
             $repository = $this->getDoctrine()->getRepository(User::class);//Il conviendra de recuperer l'id du user qui a entamé la session
            
-            $user_obj= $repository->findOneBy(['id' => 1]);//Nous remplaçerons l'id 1 par l'id de la session
-            $publication->setUser($user_obj);
+            
              $em = $this->getDoctrine()->getManager();
              $em->persist($publication);
              $em->flush();
        
         }
-    $publications =  $this->show();
-    $email = $authenticationUtils->getLastUsername();
+    $publications =  $this->show($user_obj->getId());
+    
 
       
 
@@ -51,14 +56,14 @@ class PublicationController extends AbstractController
 
 
 
-    public function show()
+    public function show($id)
     {
         // je pense à bien injecter en parametre mon service pour l'utiliser
 
         // get Repository va aller au niveau des données dans la table précisée
         // SELECT query
         $repository = $this->getDoctrine()->getRepository(Publication::class);
-        $publications = $repository->findBy(array(),array('date' => 'DESC'));
+        $publications = $repository->findBy(array(),array('date' => 'DESC'),array('id'=> $id ));
 
         
         return $publications;
