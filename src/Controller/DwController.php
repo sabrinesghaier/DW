@@ -7,9 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DwController extends AbstractController
 {
-/**
-* @Route("/",name="home" )
-*/
+
 
 public function home()
     {   

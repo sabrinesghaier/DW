@@ -37,6 +37,10 @@ class Message
     /**
     * @ORM\Column(type="string")
     */
+    private $objet;
+    /**
+    * @ORM\Column(type="string")
+    */
     private $email;
 
    /**
@@ -149,6 +153,26 @@ class Message
     public function setNom($nom)
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of objet
+     */ 
+    public function getObjet()
+    {
+        return $this->objet;
+    }
+
+    /**
+     * Set the value of objet
+     *
+     * @return  self
+     */ 
+    public function setObjet($objet)
+    {
+        $this->objet = $objet;
 
         return $this;
     }

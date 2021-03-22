@@ -11,9 +11,7 @@ use App\Service\MessageGenerator;
 
 class HomeController extends AbstractController
 {
-    /**
-     * @Route("/", name="home")
-     */
+    
     public function new(Request $request, MessageGenerator $messageGenerator)
     {
        

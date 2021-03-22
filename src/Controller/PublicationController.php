@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\PublicationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 
 use DateTime;
@@ -16,7 +17,7 @@ class PublicationController extends AbstractController
     /**
      * @Route("/publication", name="publication" )
      */
-    public function new(Request $request)
+    public function new(Request $request, AuthenticationUtils $authenticationUtils)
     {
         $publication = new Publication();#Instanciation de la class Champs. $champs est un objet
 
@@ -40,8 +41,12 @@ class PublicationController extends AbstractController
        
         }
     $publications =  $this->show();
+    $email = $authenticationUtils->getLastUsername();
 
-    return $this->render('publication/index.html.twig', ['FormulairePublication'=>$form->createView(),'publication'=>$publications]);
+      
+
+
+    return $this->render('publication/index.html.twig', ['FormulairePublication'=>$form->createView(),'publication'=>$publications, 'email' => $email]);
     }
 
 
@@ -67,6 +72,8 @@ class PublicationController extends AbstractController
 
    
     }
+
+   
 
 
 

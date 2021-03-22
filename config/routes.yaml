@@ -1,4 +1,4 @@
   
 app_dw:
-   path: /
-   controller: App\Controller\DwController::home
+   path: /login
+   controller: App\Controller\SecurityController::home

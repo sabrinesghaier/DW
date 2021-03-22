@@ -7,10 +7,14 @@
 {% endblock %}
 {% block contenuPrincipal %}
     {{ parent() }}
-<div class="container">    
-    <div class="row">
-        <div class="col-6">Fil d'actualité</div>
-        <div class="col-6 ">
+
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-3">
+        </div>
+        <div class="col-5" style="width: 35rem;">
+            <div class="">
                 {{ form_start(FormulairePublication) }}
                     
                     <div class="danger">
@@ -22,25 +26,58 @@
                     </div>
                    
                    
-                        {{form_widget(FormulairePublication.publish, { 'value': '' }) }}
+                        {{form_widget(FormulairePublication.publier, { 'value': '' }) }}
            
                {{form_end(FormulairePublication) }}
+             </div>
         </div>
-
+        <div class="col-3">
+      
+        </div>
     </div>
-    <div class="row">
-        <ul>
-        {% for y in publication %}
 
-   
-    
-            <li>{{ y.description}}</li>
-           
-            <hr/>
-        {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col-3" style="width: 18rem;">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">#JavaScript</li>
+                    <li class="list-group-item">#Symfony</li>
+                    <li class="list-group-item">#php</li>
+                    <li class="list-group-item">#HTML5</li>
+                    <li class="list-group-item">#CSS3</li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="col-5" style="width: 35rem;">
+            
+                {% for y in publication %}
+                <div class="card border-warning mb-3">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        
+                        <p class="card-text">{{ y.description}}</p>
+                        
+                      
+                        <a href="#" class="">Commenter</a>
+                    </div>
+                </div>
+                {% endfor %}
+            
+            
+        </div>
+        <div class="col-3 " style="width: 18rem;">
+            <div class="card">
+                <img src="{{asset('/images/surface-u-DikRnIxrI-unsplash.jpg')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Profil</h5>
+                    <p class="card-text"> {{ email }}</p>
+                    <a href="#" class="btn btn-primary">Page profil</a>
+                </div>
+            </div>
+        
+        </div>
     </div>
 </div>
-
-
 {% endblock %}    

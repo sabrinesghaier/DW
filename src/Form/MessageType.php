@@ -17,6 +17,7 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class)
+            ->add('objet',TextType::class)
             ->add('email', EmailType::class)
             ->add('texte', TextareaType::class)
             ->add('date', DateType::class)
