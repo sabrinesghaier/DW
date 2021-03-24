@@ -27,13 +27,13 @@ class Discussion
     /**
      * Il y a une discussion pour plusieurs messages
      * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="discussion")
-     * @ORM\JoinColumn(name="message_id", referencedColumnName="id")
      */
     private $message; 
 
     /**
      * Il y a plusieurs user possible pour plusieurs relations
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="discussions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User",inversedBy="discussions")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
      /**

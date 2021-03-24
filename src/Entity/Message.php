@@ -46,6 +46,7 @@ class Message
    /**
      * Il y a un seul user possible pour plusieurs discussions
      * @ORM\ManyToOne(targetEntity="App\Entity\Discussion", inversedBy="messages")
+     * @ORM\JoinColumn(name="discution_id", referencedColumnName="id")
      */
     private $discussion;
 

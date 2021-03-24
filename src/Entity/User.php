@@ -35,7 +35,7 @@ class User implements UserInterface
 
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", unique=true)
      */
     private $mail;
 
@@ -53,14 +53,13 @@ class User implements UserInterface
     /**
      * Il y a un seul user possible pour plusieurs discussions
      * @ORM\OneToMany(targetEntity="App\Entity\Discussion", mappedBy="user")
-     * @ORM\JoinColumn(name="discussion_id", referencedColumnName="id")
      */
     private $discussion;
 
     /**
      * Il y a un seul user possible pour plusieurs publications
      * @ORM\OneToMany(targetEntity="App\Entity\Publication", mappedBy="user")
-     * @ORM\JoinColumn(name="publication_id", referencedColumnName="id")
+     
      */
     private $publication;
 

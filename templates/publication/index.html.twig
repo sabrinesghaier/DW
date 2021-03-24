@@ -22,8 +22,11 @@
                     </div>
                     
                     <div class="form-group">
+                        
                         {{ form_row(FormulairePublication.description) }}
                     </div>
+                   
+
                    
                    
                         {{form_widget(FormulairePublication.publier, { 'value': '' }) }}
@@ -50,21 +53,41 @@
             
         </div>
         <div class="col-5" style="width: 35rem;">
+           
             
                 {% for y in publication %}
-                <div class="card border-warning mb-3">
+                <div class="card border-warning mb-3 pub">
                     
+                    <div class="row ">
+                        <div class="col-2"><img class="img-avatar" src="{{asset('/images/avatar.jpg')}}"></div>
+                        <div class="col-9">
+                       
+                        
+                            
+                                  {{y.user.firstname ~ ' ' ~ y.user.lastname}} 
+                           
+                        </div>
+                 </div>
                     <div class="card-body">
-                        <h5 class="card-title"></h5>
-                        
-                        <p class="card-text">{{ y.description}}</p>
-                        
-                      
-                        <a href="#" class="">Commenter</a>
+                        <div class="row">
+                            <div class="col-12">{{y.description}}</div>
+                            <a href=" {{ path('commenter', {'id': y.id }) }}" class="">Commenter</a>
+                        </div>
+                       
+
+
                     </div>
+                    {% if  y.commentaire | length != 0 %}
+                      <div class="card">
+                            {% for c in y.commentaire %}
+                                <p class="card-text">{{ c.contenu}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
+               
+                
                 {% endfor %}
-            
             
         </div>
         <div class="col-3 " style="width: 18rem;">
@@ -72,8 +95,10 @@
                 <img src="{{asset('/images/surface-u-DikRnIxrI-unsplash.jpg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Profil</h5>
-                    <p class="card-text"> {{ email }}</p>
-                    <a href="#" class="btn btn-primary">Page profil</a>
+                    <p class="card-text">{{user.firstname ~ ' ' ~ user.lastname}}</p>
+                   
+                     <a class="nav-link  btn btn-primary"  aria-current="page"  href="{{path('profil')}}">
+                      Page profil</a>
                 </div>
             </div>
         

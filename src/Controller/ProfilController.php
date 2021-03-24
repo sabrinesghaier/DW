@@ -9,19 +9,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\MessageGenerator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-class UserController extends AbstractController
+class ProfilController extends AbstractController
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/profil", name="profil")
      */
-    public function new(Request $request, MessageGenerator $messageGenerator, UserPasswordEncoderInterface $encoder)
+    public function new( AuthenticationUtils $authenticationUtils, Request $request, MessageGenerator $messageGenerator, UserPasswordEncoderInterface $encoder)
     {
        
-        
+        $email = $authenticationUtils->getLastUsername();
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user= $repository->findOneBy(['mail' => $email]);
        
-        $user = new User();#Instanciation de la class User. $user est un objet
+       // $user = new User();#Instanciation de la class User. $user est un objet
         
         
         $form = $this->createForm(UserType::class , $user);
@@ -41,13 +43,13 @@ class UserController extends AbstractController
              $message = $messageGenerator->getHappyMessage();
              //$this->addFlash('success', 'Formulaire Envoyé!');
 
-             return $this->redirectToRoute('app_login');
+            // return $this->redirectToRoute('/login');
 
          
         }
        
 
-      return $this->render('user/index.html.twig', [
+      return $this->render('profil/index.html.twig', [
             
             'Formulaire'=>$form->createView(),
             'message'=>$message ]);    

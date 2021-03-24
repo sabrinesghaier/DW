@@ -19,7 +19,10 @@ class Publication
     * @ORM\Column(type="integer")
     */
     public $id;
-
+    /**
+    * @ORM\Column(type="string")
+    */
+    private $name;
     /**
     * @ORM\Column(type="string")
     */
@@ -42,14 +45,14 @@ class Publication
     /**
      * Il y a plusieurs publications possible pour un user
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="publications")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
 
      /**
      * Il y a une publication pour plusieurs commentaires
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="publication")
-     *  
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="publication") 
      */
     private $commentaire;
 
@@ -172,4 +175,24 @@ class Publication
 
      
    
+
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 }

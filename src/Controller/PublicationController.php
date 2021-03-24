@@ -9,8 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\PublicationRepository;
 
 use DateTime;
+use Symfony\Component\Validator\Constraints\Length;
 
 class PublicationController extends AbstractController
 {    
@@ -28,8 +30,7 @@ class PublicationController extends AbstractController
         $email = $authenticationUtils->getLastUsername();
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user_ob= $repository->findOneBy(['mail' => $email]);
-        $user_obj= $repository->findOneBy(['id' => $user_ob->getId()]);//Nous remplaçerons l'id 1 par l'id de la session
-        $publication->setUser($user_obj);
+       
 
    		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
        		dump($publication);//alors afficher le contenu de l'objet $article sur la console
@@ -38,20 +39,22 @@ class PublicationController extends AbstractController
     
             $publication->setType("texte");//Il convient de creer une table Type et de pointer vers son id
             $repository = $this->getDoctrine()->getRepository(User::class);//Il conviendra de recuperer l'id du user qui a entamé la session
-           
-            
-             $em = $this->getDoctrine()->getManager();
-             $em->persist($publication);
-             $em->flush();
+            $publication->setName('name');
+            $user_obj= $repository->findOneBy(['id' => $user_ob->getId()]);//Nous remplaçerons l'id 1 par l'id de la session
+            $publication->setUser($user_obj);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($publication);
+            $em->flush();
        
         }
-    $publications =  $this->show($user_obj->getId());
+    $publications =  $this->show($user_ob);
+    
     
 
       
 
 
-    return $this->render('publication/index.html.twig', ['FormulairePublication'=>$form->createView(),'publication'=>$publications, 'email' => $email]);
+    return $this->render('publication/index.html.twig', ['FormulairePublication'=>$form->createView(),'publication'=>$publications, 'user' => $user_ob]);
     }
 
 
@@ -63,8 +66,12 @@ class PublicationController extends AbstractController
         // get Repository va aller au niveau des données dans la table précisée
         // SELECT query
         $repository = $this->getDoctrine()->getRepository(Publication::class);
-        $publications = $repository->findBy(array(),array('date' => 'DESC'),array('id'=> $id ));
+        $publications = $repository->findBy(array(),array('date' => 'DESC'));
+        //dump ($publications);
+        //die();
+    
 
+    
         
         return $publications;
         // stocker dans $message le resultat du service : donc un message gentil

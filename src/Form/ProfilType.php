@@ -1,42 +1,46 @@
 <?php
 namespace App\Form;
 
-use App\Entity\Publication;
+
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
-class PublicationType extends AbstractType
+
+
+
+
+class ProfilType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
-        
-        ->add('description', TextareaType::class,[
+        ->add('firstname', TextType::class,[
             'attr' => [
                 // this will always show, and is a standard html attribute
                 'class' => 'form-control',
-                'rows' => '3'
-            ]
-            ])
-       
-        ->add('publier', SubmitType::class,[
-            'attr' => [
-                // this will always show, and is a standard html attribute
-                'class' => 'btn btn-primary btn-publish',
               
             ]
-        ]);
+        ])
+        ->add('lastname', TextType::class)
+        ->add('phone', TelType::class)
+        
+        ->add('password', PasswordType::class)
+       
+       
+        ->add('save', SubmitType::class
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Publication::class,
+            'data_class' => User::class,
         ]);
     }
 

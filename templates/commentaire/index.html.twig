@@ -1,20 +1,76 @@
-{% extends 'base.html.twig' %}
+{% extends 'navbar.html.twig' %}
 
-{% block title %}Hello CommentaireController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/Symfony/DW/src/Controller/CommentaireController.php'|file_link(0) }}">src/Controller/CommentaireController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/Symfony/DW/templates/commentaire/index.html.twig'|file_link(0) }}">templates/commentaire/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{asset('/css/style.css')}}" rel="stylesheet" media="all">  
+ 
 {% endblock %}
+{% block contenuPrincipal %}
+    {{ parent() }}
+
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-3">
+        </div>
+        <div class="col-5" style="width: 35rem;">
+            <div class="">
+                {{ form_start(FormulaireCommentaire) }}
+                    
+                    <div class="danger">
+                       
+                    </div>
+                    
+                    <div class="form-group">
+                        
+                        {{ form_row(FormulaireCommentaire.contenu) }}
+                    </div>
+                   
+
+                   
+                   
+                        {{form_widget(FormulaireCommentaire.commenter, { 'value': '' }) }}
+           
+               {{form_end(FormulaireCommentaire) }}
+             </div>
+        </div>
+        <div class="col-3">
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3" style="width: 18rem;">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">#JavaScript</li>
+                    <li class="list-group-item">#Symfony</li>
+                    <li class="list-group-item">#php</li>
+                    <li class="list-group-item">#HTML5</li>
+                    <li class="list-group-item">#CSS3</li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="col-5" style="width: 35rem;">
+            
+                
+            
+            
+        </div>
+        <div class="col-3 " style="width: 18rem;">
+            <div class="card">
+                <img src="{{asset('/images/surface-u-DikRnIxrI-unsplash.jpg')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Profil</h5>
+                    <p class="card-text"> </p>
+                   
+                     <a class="nav-link  btn btn-primary"  aria-current="page"  href="{{path('profil')}}">
+                      Page profil</a>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+{% endblock %}    
