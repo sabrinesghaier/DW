@@ -19,11 +19,7 @@ class CommentaireType extends AbstractType
     {
         $builder
        
-        ->add('contenu', TextType::class)
-        
-       
-       
-        ->add('commenter', SubmitType::class);
+        ->add('contenu', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

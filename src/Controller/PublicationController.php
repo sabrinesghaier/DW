@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Publication;
 use App\Entity\User;
 use App\Form\PublicationType;
+use App\Form\CommentaireType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -21,16 +24,20 @@ class PublicationController extends AbstractController
      */
     public function new(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        $publication = new Publication();#Instanciation de la class Champs. $champs est un objet
-
+        $publication = new Publication();#Instanciation de la class Publication. $publication est un objet
+        $commentaire = new Commentaire();
 
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le champs description, NotBlank {ne pas retourner vide}..)
 
+        
+        $formC= $this->createForm(CommentaireType::class, $commentaire);
+        $formC->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le champs description, NotBlank {ne pas retourner vide}..)
+
         $email = $authenticationUtils->getLastUsername();
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user_ob= $repository->findOneBy(['mail' => $email]);
-       
+        $user_obj= $repository->findOneBy(['id' => $user_ob->getId()]);
 
    		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
        		dump($publication);//alors afficher le contenu de l'objet $article sur la console
@@ -42,19 +49,24 @@ class PublicationController extends AbstractController
             $publication->setName('name');
             $user_obj= $repository->findOneBy(['id' => $user_ob->getId()]);//Nous remplaçerons l'id 1 par l'id de la session
             $publication->setUser($user_obj);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($publication);
-            $em->flush();
+            $em = $this->getDoctrine()->getManager();// je recupere le manageur des données de ma table
+            $em->persist($publication);// Je prepare la sauvegarde / l'insertion de mon objet $publication dans ma base (1 ligne de table)
+            $em->flush();// execution de l'SQL
+
        
         }
+    
+    $user_connect= $repository->findOneBy(['mail' => $email]);
+    $friend =$this->getDoctrine()->getRepository(User::class)->find($user_obj->getId());
+    $isMyFriend = $user_connect->findRelations($friend);     
     $publications =  $this->show($user_ob);
     
     
-
       
+     
 
-
-    return $this->render('publication/index.html.twig', ['FormulairePublication'=>$form->createView(),'publication'=>$publications, 'user' => $user_ob]);
+    return $this->render('publication/index.html.twig', ['FormulairePublication'=>$form->createView(),'FormulaireCommentaire'=>$formC->createView(),
+    'publication'=>$publications, 'user' => $user_ob , 'isMyFriend'=>$isMyFriend]);
     }
 
 

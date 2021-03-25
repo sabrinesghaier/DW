@@ -3,44 +3,20 @@
 {% block stylesheets %}
     {{ parent() }}
 <link href="{{asset('/css/style.css')}}" rel="stylesheet" media="all">  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
  
 {% endblock %}
 {% block contenuPrincipal %}
     {{ parent() }}
 
+<body class="bg-light">
 
 <div class="container">
-    <div class="row mb-3">
-        <div class="col-3">
-        </div>
-        <div class="col-5" style="width: 35rem;">
-            <div class="">
-                {{ form_start(FormulairePublication) }}
-                    
-                    <div class="danger">
-                       
-                    </div>
-                    
-                    <div class="form-group">
-                        
-                        {{ form_row(FormulairePublication.description) }}
-                    </div>
-                   
-
-                   
-                   
-                        {{form_widget(FormulairePublication.publier, { 'value': '' }) }}
-           
-               {{form_end(FormulairePublication) }}
-             </div>
-        </div>
-        <div class="col-3">
-      
-        </div>
-    </div>
+    
 
     <div class="row">
-        <div class="col-3" style="width: 18rem;">
+
+        <div class="col-3 bloc" style="width: 18rem;">
             <div class="card">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">#JavaScript</li>
@@ -53,56 +29,156 @@
             
         </div>
         <div class="col-5" style="width: 35rem;">
+           <div class="row">
+                <div class="row mb-3">
+        
+        <div class="col-12" style="width: 35rem;">
+            <div class="">
+                {{ form_start(FormulairePublication) }}
+                    
+                    <div class="danger">
+                       
+                    </div>
+                    
+                    <div class="form-group">
+                        
+                        {{ form_row(FormulairePublication.description) }}
+                    </div>
+                   
+                   
+                    {{form_widget(FormulairePublication.publier, { 'value': '' }) }}
            
-            
-                {% for y in publication %}
+                {{form_end(FormulairePublication) }}
+             </div>
+        </div>
+       
+    </div>
+           </div>
+            {#Boucle qui permet d'afficher les publications#}
+            <div class="row">
+                 {% for y in publication %}
+                 
                 <div class="card border-warning mb-3 pub">
                     
                     <div class="row ">
-                        <div class="col-2"><img class="img-avatar" src="{{asset('/images/avatar.jpg')}}"></div>
+                    
+                        <div class="col-2"><img class="img-avatar" src="{{asset('/uploads/') ~ y.user.photo  }}"></div>
                         <div class="col-9">
                        
                         
-                            
-                                  {{y.user.firstname ~ ' ' ~ y.user.lastname}} 
-                           
+                            {#On va chercher le nom, prénom et date de publication dans le user#}
+                                <span class="name_pub">  {{y.user.firstname | capitalize  ~ ' ' ~ y.user.lastname | capitalize }}</span> 
+                                <span class="date_pub">publié le {{y.date |date('d/m/Y')}}</span>
+                                <span>
+                                   
+
+	
+
+                                    {% if user.relations != y.user.relations %}
+                                    <form action="{{ path('friend', { 'id':  y.user.id }) }}" method="POST">  
+                                      <button type="submit" class="btn btn-primary">+</button>
+                                    </form>
+                                    {%endif%}
+                                </span>
                         </div>
                  </div>
                     <div class="card-body">
+                    
                         <div class="row">
-                            <div class="col-12">{{y.description}}</div>
-                            <a href=" {{ path('commenter', {'id': y.id }) }}" class="">Commenter</a>
+                            <div class="col-12 div-pub">
+                            {#Affiche la description#}
+                            {{y.description}}
+                           
+                            </div>
+                        
+                            
+ 
+                            <!-- The Modal -->
+                            {#Pop up qui permet la création d'un formulaire#}
+                            <div class="modal" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Commenter</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+
+                                        {#Permet d'écrire un commentaire sur un publication via l'intermédiaire d'un pop up(méthode modal bootstrap)#}
+                                        {{ form_start(FormulaireCommentaire, {'action': path('commenter', {'id': y.id})}) }}
+
+                                                <div class="form-group">
+                        
+                                                     {{ form_row(FormulaireCommentaire.contenu) }}
+                                                 </div>
+                                                <button type="submit" class="btn btn-primary">Commenter</button>
+                                        
+                                        {{ form_end(FormulaireCommentaire) }}
+                                         
+
+
+                                    </div>
+                                    <!-- Modal footer -->
+                                    {#Permet de fermer le pop up#}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                        
 
-
                     </div>
+                    {#Affiche les commentaires ajoutés sur les publications#}
                     {% if  y.commentaire | length != 0 %}
-                      <div class="card">
+
+                      <div class="">
+    
                             {% for c in y.commentaire %}
-                                <p class="card-text">{{ c.contenu}}</p>
+                     
+                                <div class="div-commentaire">{{ c.contenu}}</div>
                             {% endfor %}
                         </div>
                     {% endif %}
+                             <a class="btn-comment"href=" {{ path('commenter', {'id': y.id }) }}"  data-toggle="modal" data-target="#myModal">
+           Commenter
+      </a>
+    
+
+    
                 </div>
                
-                
+             
                 {% endfor %}
+           
+            </div>
+               
             
         </div>
+        {#Affiche le profil utilisateur sur la page publication#}
         <div class="col-3 " style="width: 18rem;">
             <div class="card">
-                <img src="{{asset('/images/surface-u-DikRnIxrI-unsplash.jpg')}}" class="card-img-top" alt="...">
+                <img class="img-avatar" src="{{asset('/uploads/') ~ user.photo  }}">
                 <div class="card-body">
-                    <h5 class="card-title">Profil</h5>
-                    <p class="card-text">{{user.firstname ~ ' ' ~ user.lastname}}</p>
+                    <h5 class="card-title">{{user.firstname | capitalize  ~ ' ' ~ user.lastname | upper}}</h5>
+                    <p class="card-text">Développeuse</p>
                    
-                     <a class="nav-link  btn btn-primary"  aria-current="page"  href="{{path('profil')}}">
-                      Page profil</a>
+                     <a class="nav-link  btn btn-profil"  aria-current="page"  href="{{path('profil')}}">
+                      Voir mon profil</a>
                 </div>
             </div>
         
         </div>
     </div>
 </div>
+ {% block javascripts %}
+            <!-- JavaScript Bundle with Popper -->
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+     </body>
+        {% endblock %}
 {% endblock %}    

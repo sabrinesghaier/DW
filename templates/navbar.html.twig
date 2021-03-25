@@ -23,11 +23,15 @@
                         <ul class="navbar-nav mr-auto">
                             
                             {%if is_granted('IS_AUTHENTICATED_FULLY')%}
+                               
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{path('app_logout')}}">Profil</a>
+                                    <a class="nav-link" aria-current="page" href="{{path('profil')}}">Profil</a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" aria-current="page" href="{{path('user')}}">Messages</a>
+                                    <a class="nav-link" aria-current="page" href="{{path('publication')}}">Publications</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" aria-current="page" href="{{path('message')}}">Messagerie</a>
                                 </li>
                             {%endif%}
                                               
@@ -36,7 +40,7 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav_item">
                             {%if is_granted('IS_AUTHENTICATED_FULLY')%}
-                                <a class="nav-link " href="{{path('app_logout')}}">Se deconnecter</a>
+                                <a class="nav-link " href="{{path('app_logout')}}">Se déconnecter</a>
                              
                             {%endif%}
                             </li>
@@ -51,12 +55,21 @@
 
 
         {% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <!-- JavaScript Bundle with Popper -->
+
+        <script>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        </script>
+        {% endblock %}
          <footer class="bg-light text-center text-lg-start">
   <!-- Copyright -->
   <div class="text-center p-3 bg-warning">
-    © 2020 Copyright:
-    <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    © 2021 Copyright:
+    <a class="text-dark" href="#">Contact</a>
+    <a class="text-dark" href="{{path('mention')}}">Mentions Légales</a>
   </div>
   <!-- Copyright -->
 </footer>

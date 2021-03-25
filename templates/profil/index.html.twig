@@ -11,6 +11,7 @@
 <br/>
 {{ message}}
 <br/>
+<body class=" bg-light">
     <div class="container">
         <div class="row ">
             <div class="w-50 p-5 m-5 bg-light ">
@@ -31,6 +32,10 @@
                     <div class="form-group" >
                         {{ form_row(Formulaire.phone) }}
                     </div>
+                    <div class="form-group">
+                    {{ form_row(Formulaire.photo) }}
+                    
+                    </div>
                         {{form_widget(Formulaire.save, { 'value': '' }) }}
                        
 
@@ -39,8 +44,8 @@
 
 
             </div>
-              
+              <div class="col-2 "><img class="jaf" src="{{asset('/images/jaf.jpg')}}"></div>
         </div>
     </div>
-  
+  </body>
 {% endblock %} 

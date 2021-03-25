@@ -9,11 +9,20 @@
     {{ parent() }}
     <br/>
 <br/>
-{{ message}}
+
 <br/>
-    <div class="container">
+<body class="bg-light">
+    <div class="container ins">
+    
         <div class="row">
-            <div class="w-50 p-5 m-5 bg-light">
+            
+            <div class="col-6 mb-5">
+
+                <img class="logo" src="{{asset('/images/ins1.jpg')}}">
+            </div>
+            <div class="col-6 mb-5">
+                <h1 class="h1 m-4  font-weight-normal">Inscrivez-vous</h1>
+                <div class="bg-light p-4 ">
                 {{ form_start(Formulaire) }}
                     
                     <div class="my-custom-class-for-errors">
@@ -33,7 +42,14 @@
                     <div class="form-group" >
                         {{ form_row(Formulaire.phone) }}
                     </div>
+                    <div class="form-group" >
+                    <div class="form-group">
+                    {{ form_row(Formulaire.photo) }}
+                    
+                    </div>
+
                         {{form_widget(Formulaire.save, { 'value': '' }) }}
+                    </div>
                        
 
                     
@@ -41,8 +57,10 @@
 
 
             </div>
+            </div>
+            
               
         </div>
     </div>
-  
+  </body>
 {% endblock %} 

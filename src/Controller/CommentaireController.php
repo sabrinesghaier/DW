@@ -25,7 +25,7 @@ class CommentaireController extends AbstractController
 
 
         $form = $this->createForm(CommentaireType::class, $commentaire);
-        $form->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le champs description, NotBlank {ne pas retourner vide}..)
+        $form->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le commentaire description, NotBlank {ne pas retourner vide}..)
 
    		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
        		//dump($commentaire);//alors afficher le contenu de l'objet $article sur la console
@@ -38,9 +38,10 @@ class CommentaireController extends AbstractController
             $pub= $repository->findOneBy(['id' => $id]);//Nous remplaçerons l'id 1 par l'id de la session
             //$id = $request->request->get('id');
             $commentaire->setPublication($pub);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commentaire);
-            $em->flush();
+            $em = $this->getDoctrine()->getManager();// je recupere le manageur des données de ma table
+            $em->persist($commentaire);// Je prepare la sauvegarde / l'insertion de mon objet $commentaire dans ma base (1 ligne de table)
+            $em->flush();// execution de l'SQL
+            return $this->redirectToRoute('publication');
        
         }
     //$commentaires =  $this->show($user_ob);

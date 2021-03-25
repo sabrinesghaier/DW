@@ -1,3 +1,7 @@
+p, h1, h3,a{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .logo{
     width:100%;
    
@@ -29,9 +33,59 @@ nav{
 
 
 .btn-publish{
-    margin-left: 462px;
+    margin-left: 345px;
+    margin-top: 0px;
+    background-color: #FFC90E;
+}
+.btn-profil{
+    background-color: #FFC90E;
+
+}
+.btn-save{
+    margin-left: 422px;
     margin-top: 20px;
+    background-color: #FFC90E;
+    
 }
 
+.date_pub{
+    margin-left: 62px;
+    color : gray;
+}
+.ins{
+    margin-top:-50px;
+}
+.jaf{
+    width: 300px;
+    margin-top: 60px;
+}
+
+.name_pub{
+
+    font-size: 22px;
+    color :  #0d6efd;
+    text-decoration: underline;
+}
+
+.btn-comment{
+    margin-left: 330px
+}
+.div-pub{
+
+    box-shadow: -3px 3px 5px 0px rgba(212,212,212,0.75);
+    -webkit-box-shadow: -3px 3px 5px 0px rgba(212,212,212,0.75);
+    -moz-box-shadow: -3px 3px 5px 0px rgba(212,212,212,0.75);
+
+}
+.div-commentaire{
+    border: 1px solid beige;
+    margin-left: 31px;
+    margin-top:5px;
+
+}
+i{
+    margin-top: -500px;
+    
+}
 
 

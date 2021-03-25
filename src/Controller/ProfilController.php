@@ -27,7 +27,7 @@ class ProfilController extends AbstractController
         
         
         $form = $this->createForm(UserType::class , $user);
-        $form->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le champs description, NotBlank {ne pas retourner vide}..)
+        $form->handleRequest($request);//Verification des contraintes imposées (ex: min caractères pr le profil description, NotBlank {ne pas retourner vide}..)
         $message = '';
    		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
        		 dump($user);//alors afficher le contenu de l'objet $user sur la console
@@ -37,9 +37,11 @@ class ProfilController extends AbstractController
 
             $user->setPassword($encoded);
 
-             $em = $this->getDoctrine()->getManager();
-             $em->persist($user);
-             $em->flush();
+             $em = $this->getDoctrine()->getManager();// je recupere le manageur des données de ma table
+
+             $em->persist($user);// Je prepare la sauvegarde / l'insertion de mon objet $user dans ma base (1 ligne de table)
+
+             $em->flush();// execution de l'SQL
              $message = $messageGenerator->getHappyMessage();
              //$this->addFlash('success', 'Formulaire Envoyé!');
 
@@ -52,7 +54,7 @@ class ProfilController extends AbstractController
       return $this->render('profil/index.html.twig', [
             
             'Formulaire'=>$form->createView(),
-            'message'=>$message ]);    
+            'message'=>$message ]);  // retourne le formulaire crée  
     }
 
 }

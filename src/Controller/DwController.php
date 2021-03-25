@@ -7,10 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DwController extends AbstractController
 {
+ /**
+ * @Route("mention",name="mention" )
+ */
+public function mention()
+{        
+    return $this->render('mention.html.twig');#je veux la route /mention
+}
 
-public function home()
-    {   
-        $isConnected = false ;     
-        return $this->render('home.html.twig');#je veux la route /home
-    }
 }

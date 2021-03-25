@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,6 +27,11 @@ class ProfilType extends AbstractType
                 'class' => 'form-control',
               
             ]
+        ])
+        ->add('photo', FileType::class, [
+            'label' => 'upload',
+            
+
         ])
         ->add('lastname', TextType::class)
         ->add('phone', TelType::class)

@@ -27,7 +27,7 @@ class PublicationType extends AbstractType
         ->add('publier', SubmitType::class,[
             'attr' => [
                 // this will always show, and is a standard html attribute
-                'class' => 'btn btn-primary btn-publish',
+                'class' => 'btn  btn-publish',
               
             ]
         ]);

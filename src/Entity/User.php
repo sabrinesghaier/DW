@@ -33,6 +33,10 @@ class User implements UserInterface
     */
     private $phone;
 
+    /**
+    * @ORM\Column(type="string",nullable=true)
+    */
+    public $photo;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -74,6 +78,7 @@ class User implements UserInterface
     public function __construct()
 
     {
+        $this->relations = new ArrayCollection();
         $this->discussion = new ArrayCollection();
         $this->publication = new ArrayCollection();
         
@@ -278,9 +283,65 @@ class User implements UserInterface
      *
      * @return  self
      */ 
-    public function setRelations($relations)
+    public function  setRelations($relations)
     {
         $this->relations = $relations;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of relations
+     *
+     * @return  self
+     */ 
+    public function  addRelations(User $user)
+
+    {
+        if ($this->relations->contains($user)){  
+            
+
+        }
+        else{
+            $this->relations->add($user);
+            return $this;
+        }
+        
+
+      
+    }
+
+     /**
+     * Set the value of relations
+     *
+     * @return  self
+     */ 
+    public function  findRelations(User $user)
+    {
+        if ($this->relations->contains($user)){  
+             return true;
+
+        }
+        else{
+            return false;
+        }
+    }
+    /**
+     * Get the value of photo
+     */ 
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set the value of photo
+     *
+     * @return  self
+     */ 
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
 
         return $this;
     }
