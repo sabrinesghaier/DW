@@ -17,6 +17,7 @@ class PublicationType extends AbstractType
 
         
         ->add('description', TextareaType::class,[
+            'label'=> ' ',
             'attr' => [
                 // this will always show, and is a standard html attribute
                 'class' => 'form-control',

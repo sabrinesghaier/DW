@@ -40,7 +40,7 @@ class MessageController extends AbstractController
             $mailer->send($contact);
             $messages = $messageGenerator->getHappyMessage();// Permet un message flash de renvoi
             
-        return $this->redirectToRoute('home');
+       // return $this->redirectToRoute('home');
            
         }
         return $this->render('message/index.html.twig',['Formulaire' => $form->createView()]);

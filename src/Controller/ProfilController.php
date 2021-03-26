@@ -37,6 +37,20 @@ class ProfilController extends AbstractController
 
             $user->setPassword($encoded);
 
+             //Upload de fichier
+             //Ds un fichier on récupère une donnée depuis le formulaire
+             $file = $form->get('photo')->getData();
+        
+        
+        
+             //Donner un nom unique -> md5 - hash / uniquid=genere un identifiant unique
+             $fileName = md5(uniqid()).'.'.$file->guessExtension();
+     
+             $file->move($this->getParameter('brochures_directory'), $fileName);
+     
+             //renvoi $fileName
+             $user->setPhoto($fileName);
+
              $em = $this->getDoctrine()->getManager();// je recupere le manageur des données de ma table
 
              $em->persist($user);// Je prepare la sauvegarde / l'insertion de mon objet $user dans ma base (1 ligne de table)
@@ -54,7 +68,8 @@ class ProfilController extends AbstractController
       return $this->render('profil/index.html.twig', [
             
             'Formulaire'=>$form->createView(),
-            'message'=>$message ]);  // retourne le formulaire crée  
+            'message'=>$message,
+            'user'=>$user ]);  // retourne le formulaire crée  
     }
 
 }

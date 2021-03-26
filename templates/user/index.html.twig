@@ -16,47 +16,49 @@
     
         <div class="row">
             
-            <div class="col-6 mb-5">
+                <div class="col-6  mb-5">
 
-                <img class="logo" src="{{asset('/images/ins1.jpg')}}">
-            </div>
-            <div class="col-6 mb-5">
+                    <img class="logo" src="{{asset('/images/ins1.jpg')}}">
+                </div>
+                <div class="col-6 mb-5">
                 <h1 class="h1 m-4  font-weight-normal">Inscrivez-vous</h1>
                 <div class="bg-light p-4 ">
                 {{ form_start(Formulaire) }}
                     
-                    <div class="my-custom-class-for-errors">
-                        {{ form_errors(Formulaire) }}
-                    </div>
+                            <div class="my-custom-class-for-errors">
+                                {{ form_errors(Formulaire) }}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form_row(Formulaire.firstname) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(Formulaire.lastname) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(Formulaire.mail) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(Formulaire.password) }}
+                            </div>
+                            <div class="form-group" >
+                                {{ form_row(Formulaire.phone) }}
+                            </div>
+                            <div class="form-group" >
+                            <div class="form-group">
+                            {{ form_row(Formulaire.photo) }}
+                            
+                            </div>
+
+                                {{form_widget(Formulaire.save, { 'value': '' }) }}
+                            </div>
+                            
+
                     
-                    <div class="form-group">
-                        {{ form_row(Formulaire.firstname) }}
-                    </div><div class="form-group">
-                        {{ form_row(Formulaire.lastname) }}
-                    </div><div class="form-group">
-                        {{ form_row(Formulaire.mail) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(Formulaire.password) }}
-                    </div>
-                    <div class="form-group" >
-                        {{ form_row(Formulaire.phone) }}
-                    </div>
-                    <div class="form-group" >
-                    <div class="form-group">
-                    {{ form_row(Formulaire.photo) }}
-                    
-                    </div>
-
-                        {{form_widget(Formulaire.save, { 'value': '' }) }}
-                    </div>
-                       
-
-                    
-               {{ form_end(Formulaire) }}
+                        {{ form_end(Formulaire) }}
 
 
-            </div>
+                </div>
             </div>
             
               

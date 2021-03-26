@@ -42,7 +42,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", unique=true)
      */
     private $mail;
-
+/**
+     * @ORM\Column(type="string")
+     */
+    private $isConected;
     /**
      * @ORM\Column(type="json")
      */
@@ -342,6 +345,26 @@ class User implements UserInterface
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isConected
+     */ 
+    public function getIsConected()
+    {
+        return $this->isConected;
+    }
+
+    /**
+     * Set the value of isConected
+     *
+     * @return  self
+     */ 
+    public function setIsConected($isConected)
+    {
+        $this->isConected = $isConected;
 
         return $this;
     }

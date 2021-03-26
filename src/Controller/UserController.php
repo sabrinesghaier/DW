@@ -34,6 +34,7 @@ class UserController extends AbstractController
             $encoded = $encoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($encoded);
+            $user->setIsConected('false');
             //Upload de fichier
              //Ds un fichier on récupère une donnée depuis le formulaire
             $file = $form->get('photo')->getData();
@@ -65,15 +66,11 @@ class UserController extends AbstractController
 
   }  
     
-        return $this->render('user/index.html.twig',['Formulaire' => $form->createView()]);
+    return $this->render('user/index.html.twig',['Formulaire' => $form->createView()]);
     
-   
-
-         
-
        
 
-      return $this->render('user/index.html.twig', [
+    return $this->render('user/index.html.twig', [
             
             'Formulaire'=>$form->createView(),
             'message'=>$message ]);    
@@ -104,6 +101,9 @@ class UserController extends AbstractController
         }
         
 
+        
+    }
+    public function isConneted(){
         
     }
     

@@ -30,7 +30,7 @@ class ProfilType extends AbstractType
         ])
         ->add('photo', FileType::class, [
             'label' => 'upload',
-            
+            'data_class' => null
 
         ])
         ->add('lastname', TextType::class)

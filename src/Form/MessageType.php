@@ -21,7 +21,7 @@ class MessageType extends AbstractType
             ->add('objet',TextType::class)
             ->add('email', EmailType::class)
             ->add('texte', TextareaType::class)
-            ->add('date', DateType::class)
+          
             
             ->add('photo', FileType::class, [
                 'label' => 'upload',

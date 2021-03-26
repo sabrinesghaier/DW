@@ -1,10 +1,12 @@
+
 {% extends 'navbar.html.twig' %}
 {% form_theme Formulaire 'bootstrap_4_layout.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
-<link href="{{asset('/css/theme.css')}}" rel="stylesheet" media="all">    
+<link href="{{asset('/css/style.css')}}" rel="stylesheet" media="all">  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ 
 {% endblock %}
-
 {% block contenuPrincipal %}
     {{ parent() }}
     <br/>
@@ -15,6 +17,7 @@
     <div class="container">
         <div class="row ">
             <div class="w-50 p-5 m-5 bg-light ">
+            <h1>Modifiez votre profil</h1>
                 {{ form_start(Formulaire) }}
                     
                     <div class="my-custom-class-for-errors">
@@ -36,6 +39,11 @@
                     {{ form_row(Formulaire.photo) }}
                     
                     </div>
+
+                     <div class="form-group diactivate" >
+                    {{ form_row(Formulaire.mail) }}
+                    
+                    </div>
                         {{form_widget(Formulaire.save, { 'value': '' }) }}
                        
 
@@ -44,7 +52,7 @@
 
 
             </div>
-              <div class="col-2 "><img class="jaf" src="{{asset('/images/jaf.jpg')}}"></div>
+              <div class="col-2 "><img class="jaf" src="{{asset('/uploads/') ~ user.photo  }}"></div>
         </div>
     </div>
   </body>

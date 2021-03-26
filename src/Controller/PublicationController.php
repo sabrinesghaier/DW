@@ -37,6 +37,7 @@ class PublicationController extends AbstractController
         $email = $authenticationUtils->getLastUsername();
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user_ob= $repository->findOneBy(['mail' => $email]);
+        //$user_ob->setIsConected('true');
         $user_obj= $repository->findOneBy(['id' => $user_ob->getId()]);
 
    		if ($form->isSubmitted() && $form->isValid()) {// si "submit" et tout est valide
@@ -60,6 +61,8 @@ class PublicationController extends AbstractController
     $friend =$this->getDoctrine()->getRepository(User::class)->find($user_obj->getId());
     $isMyFriend = $user_connect->findRelations($friend);     
     $publications =  $this->show($user_ob);
+
+    
     
     
       
@@ -99,7 +102,7 @@ class PublicationController extends AbstractController
 
    
 
-
+    
 
 
   
